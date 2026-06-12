@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-950: #060914;
+  --color-navy-900: #0a0f1f;
+  --color-navy-800: #111933;
+  --color-navy-700: #1a2347;
+  --color-silver-100: #f3f5f9;
+  --color-silver-200: #dde2ec;
+  --color-silver-300: #b9c1d1;
+  --color-silver-400: #8893ab;
+  --color-accent-500: #e2222b;
+  --color-accent-600: #c11118;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", "Inter", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: #060914;
+  color: #f3f5f9;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* Subtle grid texture */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Glow */
+.glow-red {
+  box-shadow: 0 10px 40px -10px rgba(226, 34, 43, 0.55);
+}
+
+/* Floating animation */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-float {
+  animation: floatY 4s ease-in-out infinite;
+}
+
+@keyframes pulseRing {
+  0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55); }
+  70% { box-shadow: 0 0 0 18px rgba(34, 197, 94, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+.pulse-ring {
+  animation: pulseRing 2s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-150%) skewX(-20deg); }
+  100% { transform: translateX(250%) skewX(-20deg); }
+}
+.shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 30%, rgba(255, 255, 255, 0.18) 50%, transparent 70%);
+  transform: translateX(-150%) skewX(-20deg);
+  pointer-events: none;
+}
+.shine:hover::after {
+  animation: shine 1s ease-out;
+}
+
+/* Fade-up on scroll using IntersectionObserver class hook */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0f1f;
+}
+::-webkit-scrollbar-thumb {
+  background: #1a2347;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #e2222b;
+}
